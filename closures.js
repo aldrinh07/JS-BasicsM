@@ -46,6 +46,15 @@ callFriend()(number);
 */
 
   //Code Here
+
+  var makeCounter = function(){
+      var counter = 0;
+      return function(){
+      counter++;
+      return counter;
+      };
+  };
+
   var count = makeCounter();
   count() // 1
   count() // 2
@@ -64,8 +73,25 @@ callFriend()(number);
 */
 
   //Code Here
+var sayHello = function(){
+    console.log("Hello");
+};
 
+var once = function(cb){
+    var counter = 0;
+    return function(){
+        if(counter === 1){
+            console.log('Stop, you have already said Hello');
+            return
+        }
+        counter++;
+        cb();
+    }
+};
 
+var sayOnce = once(sayHello);
+
+sayOnce();
 
 //Next Problem
 
@@ -74,7 +100,25 @@ callFriend()(number);
 /*
   Now, similar to the last problem, write a function called 'fnCounter' that accepts two parameters. The first parameter will be an anonymous function and the second parameter, 'N', will be a number. Now, in 'fnCounter', allow the anonymous funciton to be invoked 'N' number of times. After it's been invoked 'N' number of times, return 'STOP'.
 */
+var sayHello = function(){
+    console.log("Hello");
+};
 
+var once = function(cb, n){
+    var counter = 0;
+    return function(){
+        if(counter === n){
+            console.log('Stop, you have already said Hello N number of times');
+            return
+        }
+        counter++;
+        cb();
+    }
+};
+
+var sayTwice = once(sayHello, 2);
+
+sayTwice();
 
 
 //Next Problem
@@ -106,7 +150,17 @@ callFriend()(number);
 */
 
     //Code Here
+function doSetTimeout(i) {
+    setTimeout(function() {
+        console.log(i);
+    }, i*1000 );
+}
 
+var counter = function(){
+    for (var i=1; i<=5; i++) {
+        doSetTimeout(i);
+    }
+};
 
 
 //Next Problem
@@ -114,16 +168,24 @@ callFriend()(number);
 
 
 /*
-  Make the following code work
+  Make the following code work*/
 
-  funcArray[0]() //0
-  funcArray[1]() //1
-  funcArray[2]() //2
-  funcArray[3]() //3
-  funcArray[4]() //4
-  funcArray[5]() //5
+var func = function(n) {
+return function(){
+    return n;
+}
+};
 
-  *Hint: Don't let this fool you. Break down what's really happening here.
-*/
+var funcArray = [func(0),func(1),func(2),func(3),func(4),func(5)];
+
+funcArray[0]() //0
+funcArray[1]() //1
+funcArray[2]() //2
+funcArray[3]() //3
+funcArray[4]() //4
+funcArray[5]() //5
+
+/*Hint: Don't let this fool you. Break down what's really happening here.
+
 
 
